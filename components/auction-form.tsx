@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -27,6 +27,26 @@ export default function AuctionForm() {
     bid_amount_2: "",
     bid_amount_3: "",
   })
+  const [maxBids, setMaxBids] = useState({
+  bid_amount_1: 0,
+  bid_amount_2: 0,
+  bid_amount_3: 0,
+})
+
+useEffect(() => {
+  async function fetchMaxBids() {
+    try {
+      const res = await fetch("/api/get-max-bids")
+      const data = await res.json()
+      setMaxBids(data)
+    } catch (error) {
+      console.error("Failed to fetch max bids", error)
+    }
+  }
+
+  fetchMaxBids()
+}, [])
+
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
 
@@ -140,6 +160,9 @@ export default function AuctionForm() {
                 <Label htmlFor="bid_amount_1" className="text-sm font-medium">
                   Item #1 Bid
                 </Label>
+                <p className="text-sm text-muted-foreground">
+    Current highest bid: ${maxBids.bid_amount_1}
+  </p>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
                   <Input
@@ -160,6 +183,10 @@ export default function AuctionForm() {
                 <Label htmlFor="bid_amount_2" className="text-sm font-medium">
                   Item #2 Bid
                 </Label>
+                <p className="text-sm text-muted-foreground">
+  Current highest bid: ${maxBids.bid_amount_2}
+</p>
+
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
                   <Input
@@ -180,6 +207,10 @@ export default function AuctionForm() {
                 <Label htmlFor="bid_amount_3" className="text-sm font-medium">
                   Item #3 Bid
                 </Label>
+                <p className="text-sm text-muted-foreground">
+  Current highest bid: ${maxBids.bid_amount_3}
+</p>
+
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
                   <Input
