@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -27,26 +27,6 @@ export default function AuctionForm() {
     bid_amount_2: "",
     bid_amount_3: "",
   })
-  const [maxBids, setMaxBids] = useState({
-  bid_amount_1: 0,
-  bid_amount_2: 0,
-  bid_amount_3: 0,
-})
-
-useEffect(() => {
-  async function fetchMaxBids() {
-    try {
-      const res = await fetch("/api/get-max-bids")
-      const data = await res.json()
-      setMaxBids(data)
-    } catch (error) {
-      console.error("Failed to fetch max bids", error)
-    }
-  }
-
-  fetchMaxBids()
-}, [])
-
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
 
@@ -73,8 +53,8 @@ useEffect(() => {
 
       if (result.success) {
         toast({
-          title: "Bid submitted successfully!",
-          description: "Your auction bids have been recorded.",
+          title: "Ставку успішно подано!",
+          description: "Ваші ставки на аукціоні зареєстровано.",
         })
 
         // Reset form
@@ -91,8 +71,8 @@ useEffect(() => {
     } catch (error) {
       console.error("Error submitting bid:", error)
       toast({
-        title: "Error submitting bid",
-        description: error instanceof Error ? error.message : "Please try again later.",
+        title: "Помилка подання ставки",
+        description: error instanceof Error ? error.message : "Спробуйте пізніше.",
         variant: "destructive",
       })
     } finally {
@@ -103,8 +83,8 @@ useEffect(() => {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold text-primary">Auction Bidding</CardTitle>
-        <CardDescription className="text-lg">Submit your bids for the upcoming auction items</CardDescription>
+        <CardTitle className="text-3xl font-bold text-primary">Торги на аукціоні</CardTitle>
+        <CardDescription className="text-lg">ARTBAZA</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -112,18 +92,18 @@ useEffect(() => {
           <div className="space-y-4">
             <div className="flex items-center gap-2 mb-4">
               <Badge variant="outline" className="text-sm">
-                Personal Information
+                Персональна інформація
               </Badge>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">Ім'я</Label>
                 <Input
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Enter your full name"
+                  placeholder="Введіть своє повне ім'я"
                   value={formData.name}
                   onChange={handleInputChange}
                   required
@@ -132,12 +112,12 @@ useEffect(() => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
+                <Label htmlFor="email">Пошта</Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Введіть свою електронну адресу"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
@@ -151,18 +131,15 @@ useEffect(() => {
           <div className="space-y-4">
             <div className="flex items-center gap-2 mb-4">
               <Badge variant="outline" className="text-sm">
-                Bid Amounts
+                Ставки
               </Badge>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="bid_amount_1" className="text-sm font-medium">
-                  Item #1 Bid
+                  Ставка на лот 1
                 </Label>
-                <p className="text-sm text-muted-foreground">
-    Current highest bid: ${maxBids.bid_amount_1}
-  </p>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
                   <Input
@@ -181,12 +158,8 @@ useEffect(() => {
 
               <div className="space-y-2">
                 <Label htmlFor="bid_amount_2" className="text-sm font-medium">
-                  Item #2 Bid
+                  Ставка на лот 2
                 </Label>
-                <p className="text-sm text-muted-foreground">
-  Current highest bid: ${maxBids.bid_amount_2}
-</p>
-
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
                   <Input
@@ -205,12 +178,8 @@ useEffect(() => {
 
               <div className="space-y-2">
                 <Label htmlFor="bid_amount_3" className="text-sm font-medium">
-                  Item #3 Bid
+                  Ставка на лот 3
                 </Label>
-                <p className="text-sm text-muted-foreground">
-  Current highest bid: ${maxBids.bid_amount_3}
-</p>
-
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
                   <Input
@@ -230,7 +199,7 @@ useEffect(() => {
           </div>
 
           <Button type="submit" className="w-full h-12 text-lg font-semibold" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting Bids..." : "Submit Auction Bids"}
+            {isSubmitting ? "Submitting Bids..." : "зробити ставку"}
           </Button>
         </form>
       </CardContent>

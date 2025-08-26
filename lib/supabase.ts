@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js"
 
+export { createClient }
+
 // Server-side Supabase client
 export function createServerSupabaseClient() {
   const supabaseUrl = process.env.SUPABASE_URL!
