@@ -14,18 +14,18 @@ import { submitBid } from "@/app/actions"
 interface BidFormData {
   name: string
   email: string
-  bid_amount_1: string
-  bid_amount_2: string
-  bid_amount_3: string
+  bid_big: string
+  bid_medium: string
+  bid_small: string
 }
 
 export default function AuctionForm() {
   const [formData, setFormData] = useState<BidFormData>({
     name: "",
     email: "",
-    bid_amount_1: "",
-    bid_amount_2: "",
-    bid_amount_3: "",
+    bid_big: "",
+    bid_medium: "",
+    bid_small: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
@@ -46,9 +46,9 @@ export default function AuctionForm() {
       const result = await submitBid({
         name: formData.name,
         email: formData.email,
-        bid_amount_1: Number.parseFloat(formData.bid_amount_1) || 0,
-        bid_amount_2: Number.parseFloat(formData.bid_amount_2) || 0,
-        bid_amount_3: Number.parseFloat(formData.bid_amount_3) || 0,
+        bid_big: Number.parseFloat(formData.bid_big) || 0,
+        bid_medium: Number.parseFloat(formData.bid_medium) || 0,
+        bid_small: Number.parseFloat(formData.bid_small) || 0,
       })
 
       if (result.success) {
@@ -57,13 +57,12 @@ export default function AuctionForm() {
           description: "Ваші ставки на аукціоні зареєстровано.",
         })
 
-        // Reset form
         setFormData({
           name: "",
           email: "",
-          bid_amount_1: "",
-          bid_amount_2: "",
-          bid_amount_3: "",
+          bid_big: "",
+          bid_medium: "",
+          bid_small: "",
         })
       } else {
         throw new Error(result.error)
@@ -137,19 +136,19 @@ export default function AuctionForm() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="bid_amount_1" className="text-sm font-medium">
-                  Ставка на лот 1
+                <Label htmlFor="bid_big" className="text-sm font-medium">
+                  Ставка на великий лот
                 </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">₴</span>
                   <Input
-                    id="bid_amount_1"
-                    name="bid_amount_1"
+                    id="bid_big"
+                    name="bid_big"
                     type="number"
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    value={formData.bid_amount_1}
+                    value={formData.bid_big}
                     onChange={handleInputChange}
                     className="h-12 pl-8"
                   />
@@ -157,19 +156,19 @@ export default function AuctionForm() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="bid_amount_2" className="text-sm font-medium">
-                  Ставка на лот 2
+                <Label htmlFor="bid_medium" className="text-sm font-medium">
+                  Ставка на середній лот
                 </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">₴</span>
                   <Input
-                    id="bid_amount_2"
-                    name="bid_amount_2"
+                    id="bid_medium"
+                    name="bid_medium"
                     type="number"
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    value={formData.bid_amount_2}
+                    value={formData.bid_medium}
                     onChange={handleInputChange}
                     className="h-12 pl-8"
                   />
@@ -177,19 +176,19 @@ export default function AuctionForm() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="bid_amount_3" className="text-sm font-medium">
-                  Ставка на лот 3
+                <Label htmlFor="bid_small" className="text-sm font-medium">
+                  Ставка на малий лот
                 </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">₴</span>
                   <Input
-                    id="bid_amount_3"
-                    name="bid_amount_3"
+                    id="bid_small"
+                    name="bid_small"
                     type="number"
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    value={formData.bid_amount_3}
+                    value={formData.bid_small}
                     onChange={handleInputChange}
                     className="h-12 pl-8"
                   />

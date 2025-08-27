@@ -5,9 +5,9 @@ import { createServerSupabaseClient } from "@/lib/supabase"
 export interface BidData {
   name: string
   email: string
-  bid_amount_1: number
-  bid_amount_2: number
-  bid_amount_3: number
+  bid_big: number
+  bid_medium: number
+  bid_small: number
 }
 
 export async function submitBid(bidData: BidData) {
@@ -18,9 +18,9 @@ export async function submitBid(bidData: BidData) {
       {
         name: bidData.name,
         email: bidData.email,
-        bid_amount_1: bidData.bid_amount_1,
-        bid_amount_2: bidData.bid_amount_2,
-        bid_amount_3: bidData.bid_amount_3,
+        bid_big: bidData.bid_big,
+        bid_medium: bidData.bid_medium,
+        bid_small: bidData.bid_small,
       },
     ])
 
