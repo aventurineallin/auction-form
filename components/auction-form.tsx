@@ -140,7 +140,7 @@ export default function AuctionForm() {
                   Ставка на великий лот
                 </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">₴</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">€</span>
                   <Input
                     id="bid_big"
                     name="bid_big"
@@ -160,7 +160,7 @@ export default function AuctionForm() {
                   Ставка на середній лот
                 </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">₴</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">€</span>
                   <Input
                     id="bid_medium"
                     name="bid_medium"
@@ -180,7 +180,7 @@ export default function AuctionForm() {
                   Ставка на малий лот
                 </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">₴</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">€</span>
                   <Input
                     id="bid_small"
                     name="bid_small"
