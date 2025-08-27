@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase"
 import { Badge } from "@/components/ui/badge"
 
+export const dynamic = "force-dynamic"
+
 export default async function LeaderboardPage() {
   const supabase = createClient()
 
